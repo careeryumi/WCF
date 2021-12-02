@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MusicDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Genre">
+    <Key>
+      <PropertyRef Name="GenreID" />
+    </Key>
+    <Property Name="GenreID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GenreName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Musics" Relationship="Self.FK_Music_Genre" FromRole="Genre" ToRole="Music" />
+  </EntityType>
+  <EntityType Name="Music">
+    <Key>
+      <PropertyRef Name="MusicID" />
+    </Key>
+    <Property Name="MusicID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MusicName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="GenreID" Type="Int32" />
+    <NavigationProperty Name="Genre" Relationship="Self.FK_Music_Genre" FromRole="Music" ToRole="Genre" />
+  </EntityType>
+  <Association Name="FK_Music_Genre">
+    <End Role="Genre" Type="Self.Genre" Multiplicity="0..1" />
+    <End Role="Music" Type="Self.Music" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Genre">
+        <PropertyRef Name="GenreID" />
+      </Principal>
+      <Dependent Role="Music">
+        <PropertyRef Name="GenreID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MusicDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Genres" EntityType="Self.Genre" />
+    <EntitySet Name="Musics" EntityType="Self.Music" />
+    <AssociationSet Name="FK_Music_Genre" Association="Self.FK_Music_Genre">
+      <End Role="Genre" EntitySet="Genres" />
+      <End Role="Music" EntitySet="Musics" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

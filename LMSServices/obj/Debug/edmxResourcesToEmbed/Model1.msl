@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MusicDBModelStoreContainer" CdmEntityContainer="MusicDBEntities">
+    <EntitySetMapping Name="Genres">
+      <EntityTypeMapping TypeName="MusicDBModel.Genre">
+        <MappingFragment StoreEntitySet="Genre">
+          <ScalarProperty Name="GenreID" ColumnName="GenreID" />
+          <ScalarProperty Name="GenreName" ColumnName="GenreName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Musics">
+      <EntityTypeMapping TypeName="MusicDBModel.Music">
+        <MappingFragment StoreEntitySet="Music">
+          <ScalarProperty Name="MusicID" ColumnName="MusicID" />
+          <ScalarProperty Name="MusicName" ColumnName="MusicName" />
+          <ScalarProperty Name="GenreID" ColumnName="GenreID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
